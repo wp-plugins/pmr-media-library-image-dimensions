@@ -53,25 +53,4 @@ function pmr_imageHeight( $column_name, $id ) {
 	}
 }
 
-add_filter( 'manage_media_sortable_columns', 'pmr_sortable_mediaColumn' );	
-function pmr_sortable_mediaColumn($columns) {
-	$columns['pmr_width'] = 'width';
-	$columns['pmr_height'] = 'height';
-	
-	return $columns;
-}
-
-add_action( 'pre_get_posts', 'my_slice_orderby' );
-function my_slice_orderby( $query ) {
-    if( ! is_admin() )
-        return;
- 
-    $orderby = $query->get( 'orderby');
- 
-    if( 'width' == $orderby ) {
-        $query->set('meta_key','pmr_width');
-        $query->set('orderby','meta_value_num');
-    }
-}
-
 ?>
